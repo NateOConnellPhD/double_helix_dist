@@ -44,11 +44,6 @@ generate_plot = function(Norm=T, #Logical: Show normal distribution
                      group = rep(c("Helix1", "Helix2", "Helix3", "Helix4"), each = length(x)),
                      dist = rep(c("Normal", "Normal", "Chisq", "Chisq"), each=length(x)))
   
-  # data_chi = data.frame(x = c(x, x), 
-  #                       y = c(y_chi1, y_chi2), 
-  #                       group = rep(c("Helix3", "Helix4"), each = length(x)))
-  # 
-  
   # Create a data frame for base pair connections
   base_pairs <- data.frame(x = c(x,x),
                            y1 = c(y1,y_chi1),
