@@ -10,20 +10,21 @@ generate_plot = function(Norm=T, #Logical: Show normal distribution
                          chisq_vals = c(2,0), #vector of DF and non centrality for chi-sq (Ignored if Chisq=F)
                          amp=0.02, #amplitude of SIN wave to create double helix; adjusts height of strand
                          freq=10, #frequency of SIN wave to create double helix; adjusts width of strands
+                         bp_density = 200, #how dense the base-pairs between strands appear (200 is default; higher = more dense)
                          xlims= c(0,10), # vector of min and max x-values for distribution generation and plot
                          ylims= c(-0.05, .45), #vector of y limits for height of plot
                          text="", #optional text to add to plot
                          text_pos = c(3,0), #vector of (x,y) coordinates for text on plot
-                         text_size=12, #test size 
+                         text_size=12, #test size
                          text_col = "cyan4", #color ot text
-                         helix_cols = c("cyan3", "cyan4", 
+                         helix_cols = c("cyan3", "cyan4",
                                         "firebrick2", "firebrick4"), #color of helix strands
                          basepair_cols = c("darkorange3", "darkred",
                                            "darkblue", "darkgreen"),
                          background_col = "azure1") #color of basepairs
                          { 
   # Define the range for x values
-  x <- seq(xlims[1], xlims[2], length.out = 200)
+  x <- seq(xlims[1], xlims[2], length.out = bp_density)
   
   # Standard normal distribution
   y <- dnorm(x, mean=norm_vals[1], sd=norm_vals[2])
@@ -63,11 +64,8 @@ generate_plot = function(Norm=T, #Logical: Show normal distribution
   set.seed(42) # Set seed for reproducibility
   base_pairs$base_type <- sample(base_pairs_options, length(x), replace = TRUE)
   
-  #Add empty space between base pairs
-  
   # Calculate the midpoint between the two helices for each x
   base_pairs$mid_y <- (base_pairs$y1 + base_pairs$y2) / 2
-  #base_pairs$mid_y_chi <- (base_pairs$y_chi1 + base_pairs$y_chi2) / 2
   
   # Define colors for each base pair based on the base type
   color_start <- ifelse(base_pairs$base_type == "Adenine-Thymine",  basepair_cols[1], 
@@ -82,6 +80,7 @@ generate_plot = function(Norm=T, #Logical: Show normal distribution
   include = c(rep(Norm, 2*length(x)), rep(Chisq, 2*length(x)))
   data = data[include,]
   
+  #Edit inclusion of base pairs
   include = c(rep(Norm, length(x)), rep(Chisq, length(x)))
   base_pairs = base_pairs[include,]
   color_start = color_start[include]

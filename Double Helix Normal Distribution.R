@@ -8,6 +8,7 @@ p1 = generate_plot(Norm=T, #Logical: Show normal distribution
                    chisq_vals = c(3,0 ), #vector of DF and non centrality for chi-sq (Ignored if Chisq=F)
                    amp=0.015,  #amplitude of SIN wave to create double helix; adjusts height of strand
                    freq=10, #frequency of SIN wave to create double helix; adjusts width of strands
+                   bp_density= 200, #how dense the base-pairs between strands appear (200 is default; higher = more dense)
                    xlims= c(0,8), # vector of min and max x-values for distribution generation and plot
                    ylims= c(-0.05, .5),  #vector of y limits for height of plot
                    text="Biostatistics \nand Data Science",  #optional text to add to plot
